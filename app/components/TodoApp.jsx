@@ -1,9 +1,14 @@
+// Libraries
 var React = require('react');
 var uuid = require('node-uuid');
 
+// Components
 var TodoSearch = require('TodoSearch');
 var TodoList = require('TodoList');
 var TodoForm = require('TodoForm');
+
+// Data storage
+var TodoAPI = require('TodoAPI');
 
 // createClass used for component that maintains state
 var TodoApp = React.createClass({
@@ -11,13 +16,11 @@ var TodoApp = React.createClass({
     return {
       showCompleted: false,
       searchText: '',
-      todos: [
-        { id: uuid(), text: 'Watch video', completed: false },
-        { id: uuid(), text: 'Write code', completed: false },
-        { id: uuid(), text: 'Push code to repo', completed: true },
-        { id: uuid(), text: 'Go shower', completed: false }
-      ]
+      todos: TodoAPI.getTodos()
     }
+  },
+  componentDidUpdate: function () {
+    TodoAPI.setTodos(this.state.todos);
   },
   handleSearch: function (showCompleted, searchText) {
     this.setState({
@@ -47,13 +50,16 @@ var TodoApp = React.createClass({
     this.setState({ todos: updatedTodos });
   },
   render: function () {
+    var { todos, showCompleted, searchText } = this.state;
+    var filteredTodos = TodoAPI.filterTodos(todos, showCompleted, searchText);
+
     return (
       <div className="row">
         <div className="columns small-12 large-6 small-centered large-centered">
           <h1 className='text-center'>Todo Application</h1>
           <TodoSearch onSearch={ this.handleSearch }/>
-          <TodoList todos={ this.state.todos } onToggle={this.handleToggle} />
-          <TodoForm onAddTodo={this.handleTodoCreation } />
+          <TodoList todos={ filteredTodos } onToggle={ this.handleToggle } />
+          <TodoForm onAddTodo={ this.handleTodoCreation } />
         </div>
       </div>
     );

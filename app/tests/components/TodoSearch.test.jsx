@@ -22,7 +22,7 @@ describe('TodoSearch', () => {
     expect(spy).toHaveBeenCalledWith(false, 'cat');
   });
 
-  it('should call onSearch whit proper checked value', () => {
+  it('should call onSearch with proper checked value', () => {
     var spy = expect.createSpy();
     var todoSearch = TestUtils.renderIntoDocument(<TodoSearch onSearch={spy}/>);
 
