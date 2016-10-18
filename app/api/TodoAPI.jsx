@@ -30,9 +30,25 @@ module.exports = {
       return !todo.completed || showCompleted;
     });
 
-    // Filter by searchText
+    // Filter by search text
+    filteredTodos = filteredTodos.filter((todo) => {
+      var text = todo.text.toLowerCase();
+      return searchText.length === 0 || text.indexOf(searchText) > -1;
+    });
 
-
+    // Filter by todo completed status
+    filteredTodos.sort((a, b) => {
+      if (!a.completed && b.completed) {
+        // display a before b
+        return -1;
+      } else if (a.completed && !b.completed) {
+        // display b before a
+        return 1;
+      } else {
+        // no change required
+        return 0;
+      }
+    });
 
     return filteredTodos;
   }

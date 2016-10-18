@@ -58,9 +58,9 @@ describe('TodoAPI', () => {
 
   describe('filterTodos', () => {
     var todos = [
-      {id: 1, text: 'Thing 1', completed: true},
-      {id: 2, text: 'Thing 2', completed: false},
-      {id: 3, text: 'Thing 3', completed: true}
+      {id: 1, text: 'Eat lunch', completed: true},
+      {id: 2, text: 'Drink tea', completed: false},
+      {id: 3, text: 'Drink water', completed: true}
     ];
 
     it('should return all items if showCompleted is true', () => {
@@ -73,8 +73,20 @@ describe('TodoAPI', () => {
       expect(filterTodos.length).toBe(1);
     });
 
-    it('should return ', () => {
+    it('should order todos and list incomplete items first', () => {
+      var filteredTodos = TodoAPI.filterTodos(todos, true, '');
+      expect(filteredTodos.length).toBe(3);
+      expect(filteredTodos[0].completed).toBe(false);
+    });
 
+    it('should filter todos by search text', () => {
+      var filteredTodos = TodoAPI.filterTodos(todos, true, 'eat');
+      expect(filteredTodos.length).toBe(1);
+    });
+
+    it('should return all todos if search text is not given', () => {
+      var filteredTodos = TodoAPI.filterTodos(todos, true, '');
+      expect(filteredTodos.length).toBe(3);
     });
   });
 });
