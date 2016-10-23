@@ -43,4 +43,5 @@ $ npm test
 
 ## NPM redux modules
 * redux
+* react-redux
 * redux-thunk

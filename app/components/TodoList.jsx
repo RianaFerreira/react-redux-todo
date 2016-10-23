@@ -1,15 +1,20 @@
 var React = require('react');
-var Todo = require('Todo');
+// provides access to parent properties and dispatch method
+var { connect }  = require('react-redux');
+import Todo from 'Todo';
+var TodoAPI = require('TodoAPI');
 
-var TodoList = React.createClass({
+export var TodoList = React.createClass({
   render: function () {
+    var { todos, showCompleted, searchText } = this.props;
+
     var renderTodo = () => {
-      if (this.props.todos.length === 0) {
+      if (todos.length === 0) {
         return (<p className="container__message">Nothing To Do</p>);
       }
 
-      return this.props.todos.map((todo) => {
-        return <Todo key={ todo.id } {...todo} onToggle={this.props.onToggle} />;
+      return TodoAPI.filterTodos(todos, showCompleted, searchText).map((todo) => {
+        return <Todo key={ todo.id } {...todo}  />;
       });
     }
 
@@ -22,4 +27,11 @@ var TodoList = React.createClass({
   }
 });
 
-module.exports = TodoList;
+
+export default connect(
+  // state needed, only return the state needed by child component
+  (state) => {
+    // sets props to contain all the items on the state tree
+    return state;
+  }
+)(TodoList);

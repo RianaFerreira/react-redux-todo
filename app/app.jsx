@@ -1,8 +1,9 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var { Provider } = require('react-redux');
 
 // ES6 destructuring syntax
-var {Route, Router, IndexRoute, hashHistory} = require('react-router');
+var { Route, Router, IndexRoute, hashHistory } = require('react-router');
 
 // Auto require all application child components
 // Ref webpack configuration resolve['modulesDirectories']
@@ -10,14 +11,16 @@ var TodoApp = require('TodoApp');
 
 var actions = require('actions');
 var store = require('configureStore').configure();
+var TodoAPI = require('TodoAPI');
 
 store.subscribe(() => {
-  console.log('New state ', store.getState());
+  var state = store.getState();
+  console.log('New state ', state);
+  TodoAPI.setTodos(state.todos);
 });
 
-store.dispatch(actions.addTodo('Clean room'));
-store.dispatch(actions.setSearchText('room'));
-store.dispatch(actions.toggleShowCompleted());
+var initialTodos = TodoAPI.getTodos();
+store.dispatch(actions.addTodos(initialTodos));
 
 // Load foundation with the css-loader installed
 $(document).foundation();
@@ -26,6 +29,6 @@ $(document).foundation();
 require('style!css!sass!applicationStyles')
 
 ReactDOM.render(
-  <TodoApp />,
+  <Provider store={ store }><TodoApp /></Provider>, 
   document.getElementById('app')
 );
