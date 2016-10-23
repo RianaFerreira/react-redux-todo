@@ -33,6 +33,7 @@ $ npm test
 * karma-webpack
 * mocha
 * expect
+* deep-freeze-strict
 
 ## NPM time management module
 * [momentjs](http://momentjs.com/)

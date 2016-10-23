@@ -1,3 +1,4 @@
+// ACTIONS ARE SIMPLE FUNCTIONS THAT RETURN OBJECTS
 export var setSearchText = (searchText) => {
   return { type: 'SET_SEARCH_TEXT', searchText };
 };
