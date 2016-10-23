@@ -8,14 +8,17 @@ $ git push -u origin master
 
 ## Pull in the project modules and run the server locally
 $ npm install
-$ webpack  
+$ webpack -w 
 $ node server.js  
+
+## Run the tests
+$ npm test
 
 ## Design
 * [Zurb Foundation] (http://foundation.zurb.com/sites/docs/)
 * [Adobe Color] (https://color.adobe.com/Color-Theme-6-color-theme-8723202/) 
 
-## Testing
+## Testing References
 * [Expect] (https://github.com/mjackson/expect) assertions
 * [Expect Cheatsheet] (http://ricostacruz.com/cheatsheets/expectjs.html)
 * [Mocha] (https://mochajs.org/) break tests up into sections
@@ -36,3 +39,7 @@ $ node server.js
 
 ## NPM unique ID module
 * [uuid](https://www.npmjs.com/package/uuid)
+
+## NPM redux modules
+* redux
+* redux-thunk
