@@ -4,6 +4,8 @@ var expect = require('expect');
 var $ = require('jQuery');
 var TestUtils = require('react-addons-test-utils');
 
+import * as actions from 'actions';
+
 // load in the raw property, that is not connected to a store
 var { TodoForm } = require('TodoForm');
 
@@ -13,7 +15,8 @@ describe('TodoForm', () => {
   });
 
   it('should dispatch ADD_TODO when valid todo text', () => {
-    var action = { type: 'ADD_TODO', text: 'Drink coffee' };
+    var todoText = 'Drink coffee';
+    var action = actions.startAddTodo(todoText);
     var spy = expect.createSpy();
     var todoForm = TestUtils.renderIntoDocument(<TodoForm dispatch={spy}/>);
     var $el = $(ReactDOM.findDOMNode(todoForm));
@@ -35,5 +38,5 @@ describe('TodoForm', () => {
     TestUtils.Simulate.submit($el.find('form')[0]);
 
     expect(spy).toNotHaveBeenCalled();
-  });  
+  });
 });

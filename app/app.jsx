@@ -13,6 +13,8 @@ var actions = require('actions');
 var store = require('configureStore').configure();
 var TodoAPI = require('TodoAPI');
 
+// import './../sandbox/firebase/index';
+
 store.subscribe(() => {
   var state = store.getState();
   console.log('New state ', state);
@@ -29,6 +31,6 @@ $(document).foundation();
 require('style!css!sass!applicationStyles')
 
 ReactDOM.render(
-  <Provider store={ store }><TodoApp /></Provider>, 
+  <Provider store={ store }><TodoApp /></Provider>,
   document.getElementById('app')
 );

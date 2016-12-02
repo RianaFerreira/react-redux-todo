@@ -11,7 +11,7 @@ describe('Reducers', () => {
       var res = reducers.searchTextReducer(df(''), df(action));
       // assert that the new state was set
       expect(res).toEqual(action.searchText);
-    }); 
+    });
   });
 
   describe('showCompletedReducer', () => {
@@ -25,18 +25,26 @@ describe('Reducers', () => {
 
   describe('todosReducer', () => {
     it('should add new todo', () => {
-      var action = { type: 'ADD_TODO', text: 'Drink Coffee' };
+      var action = {
+        type: 'ADD_TODO',
+        todo: {
+          id: 'abc123',
+          text: 'Drink Coffee',
+          completed: false,
+          completedAt: 92384275
+        }
+      };
       var res = reducers.todosReducer(df([]), df(action));
       expect(res.length).toEqual(1);
-      expect(res[0].text).toEqual(action.text);
+      expect(res[0]).toEqual(action.todo);
     });
 
     it('should toggle todo', () => {
-      var todos = [{ 
-        id: 1, 
-        text: 'Eat Dinner', 
-        completed: true, 
-        createdAt: 123, 
+      var todos = [{
+        id: 1,
+        text: 'Eat Dinner',
+        completed: true,
+        createdAt: 123,
         completedAt: 125
       }];
       var action = { type: 'TOGGLE_TODO', id: 1 };

@@ -1,5 +1,11 @@
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+
 var expect = require('expect');
 var actions = require('actions');
+
+// pass in an array of middleware
+var createMockStore = configureMockStore([thunk]);
 
 describe('Actions', () => {
   it('should generate search text action', () => {
@@ -9,8 +15,16 @@ describe('Actions', () => {
   });
 
   it('should generate add todo action', () => {
-    var action = { type: 'ADD_TODO', text: 'Drink Coffee' };
-    var res = actions.addTodo(action.text);
+    var action = {
+      type: 'ADD_TODO',
+      todo: {
+        id: '123abc',
+        text: 'Drink Coffee',
+        completed: false,
+        createdAt: 0
+      }
+    };
+    var res = actions.addTodo(action.todo);
     expect(res).toEqual(action);
   });
 
@@ -32,4 +46,17 @@ describe('Actions', () => {
     var res = actions.addTodos(todos);
     expect(res).toEqual(action);
   });
+
+  // asynchronous DB test
+  it('should create todo and dispatch ADD_TODO', (done) => {
+    const store = createMockStore({});
+    const todoText = "Hang out with Tony";
+    // wait for db response
+    store.dispatch(actions.startAddTodo(todoText)).then(() =>{
+      const actions = store.getActions();
+      expect(actions[0]).toInclude({ type: 'ADD_TODO' });
+      expect(actions[0].todo).toInclude({ text: 'Hang out with Tony' });
+      done();
+    }).catch(done);
+  })
 });

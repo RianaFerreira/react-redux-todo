@@ -1,27 +1,29 @@
 {
   "name": "sample-react-bp",
   "version": "1.0.0",
-  "description": "Simple react app",
+  "description": "Sample react redux app",
   "main": "index.js",
   "scripts": {
     "test": "karma start"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/RianaFerreira/sample-react.git"
+    "url": "git+ssh://git@github.com/RianaFerreira/react-redux-todo.git"
   },
   "author": "Riana Ferreira",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/RianaFerreira/sample-react/issues"
+    "url": "https://github.com/RianaFerreira/react-redux-todo/issues"
   },
-  "homepage": "https://github.com/RianaFerreira/sample-react#readme",
+  "homepage": "https://github.com/RianaFerreira/react-redux-todo#readme",
   "dependencies": {
     "axios": "^0.14.0",
     "express": "^4.14.0",
+    "firebase": "^3.6.2",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
-    "react-router": "^2.8.1"
+    "react-router": "^2.8.1",
+    "redux-thunk": "^2.1.0"
   },
   "devDependencies": {
     "babel-core": "^6.17.0",
@@ -47,6 +49,7 @@
     "node-uuid": "^1.4.7",
     "react-addons-test-utils": "^15.3.2",
     "react-redux": "^4.4.5",
+    "redux-mock-store": "^1.2.1",
     "sass-loader": "^4.0.2",
     "script-loader": "^0.7.0",
     "style-loader": "^0.13.1",

@@ -14,7 +14,7 @@ module.exports = {
       'jQuery': 'jquery'
     })
   ],
-  output: { 
+  output: {
     path: __dirname,
     filename: './public/bundle.js'
   },
@@ -25,7 +25,8 @@ module.exports = {
       './app/components',
       './app/api'
     ],
-    alias: { 
+    alias: {
+      app: 'app',
       applicationStyles: 'app/styles/app.sass',
       actions: 'app/actions/actions.jsx' ,
       reducers: 'app/reducers/reducers.jsx',
