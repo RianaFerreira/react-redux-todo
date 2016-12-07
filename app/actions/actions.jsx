@@ -41,6 +41,32 @@ export var addTodos = (todos) => {
   return { type: 'ADD_TODOS', todos };
 };
 
+export var startAddTodos = () => {
+  // thunk function returned for asynchronous DB request
+  return (dispatch, getState) => {
+    var todosRef = firebaseRef.child('todos');
+
+    return todosRef.once('value').then((snapshot) => {
+      var todos = snapshot.val() || {};
+      // redux expects the todos to be an array
+      var parsedTodos = [];
+
+      // convert the todos object into a formatted array
+      // take an object and returns an array
+      Object.keys(todos).forEach((todoId) => {
+        // set the id and merge in the remaining properties for the object with the todoId
+        parsedTodos.push({
+          id: todoId,
+          ...todos[todoId]
+        });
+      });
+
+      // Update the Redux store
+      dispatch(addTodos(parsedTodos));
+    });
+  };
+};
+
 export var updateTodo = (id, updates) => {
   return {
     type: 'UPDATE_TODO',

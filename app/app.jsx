@@ -15,14 +15,17 @@ var TodoAPI = require('TodoAPI');
 
 // import './../sandbox/firebase/index';
 
-store.subscribe(() => {
-  var state = store.getState();
-  console.log('New state ', state);
-  TodoAPI.setTodos(state.todos);
-});
+// Store data in the localStorage replace this with the Firebase JSON store instead
+// store.subscribe(() => {
+//   var state = store.getState();
+//   console.log('New state ', state);
+//   TodoAPI.setTodos(state.todos);
+// });
+// Initialize app data from localStorage replace this with DB data instead
+// var initialTodos = TodoAPI.getTodos();
+// store.dispatch(actions.addTodos(initialTodos));
 
-var initialTodos = TodoAPI.getTodos();
-store.dispatch(actions.addTodos(initialTodos));
+store.dispatch(actions.startAddTodos());
 
 // Load foundation with the css-loader installed
 $(document).foundation();
