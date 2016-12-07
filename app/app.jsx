@@ -4,16 +4,15 @@ var { Provider } = require('react-redux');
 
 // ES6 destructuring syntax
 // hashHistory is stored on the client
-var { Route, Router, IndexRoute, hashHistory } = require('react-router');
+var { hashHistory } = require('react-router');
 
 // Auto require all application child components
 // Ref webpack configuration resolve['modulesDirectories']
-import Login from 'Login';
-import TodoApp from 'TodoApp';
-
 var actions = require('actions');
 var store = require('configureStore').configure();
-var TodoAPI = require('TodoAPI');
+
+import firebase from 'app/firebase/';
+import router from 'app/router/';
 
 // import './../sandbox/firebase/index';
 
@@ -26,6 +25,15 @@ var TodoAPI = require('TodoAPI');
 // Initialize app data from localStorage replace this with DB data instead
 // var initialTodos = TodoAPI.getTodos();
 // store.dispatch(actions.addTodos(initialTodos));
+firebase.auth().onAuthStateChanged((user) => {
+  if(user){
+    // user is logged in redirect them to the todos page
+    hashHistory.push('/todos');
+  } else {
+    // redirect logged out user back to login page
+    hashHistory.push('/');
+  }
+});
 
 store.dispatch(actions.startAddTodos());
 
@@ -37,12 +45,7 @@ require('style!css!sass!applicationStyles')
 
 ReactDOM.render(
   <Provider store={ store }>
-    <Router history={ hashHistory }>
-      <Route path="/">
-        <Route path="todos" component={ TodoApp } />
-        <IndexRoute component={ Login } />
-      </Route>
-    </Router>
+    { router }
   </Provider>,
   document.getElementById('app')
 );
