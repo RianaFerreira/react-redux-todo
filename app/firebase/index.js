@@ -16,6 +16,7 @@ try {
 
 }
 
+export var githubProvider = new firebase.auth.GithubAuthProvider();
 export var firebaseRef = firebase.database().ref();
 // by exporting the root firebase library
 export default firebase;
