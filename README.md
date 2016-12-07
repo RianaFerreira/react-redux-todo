@@ -51,6 +51,9 @@ $ npm test
 ## NPM unique ID module
 * [uuid](https://www.npmjs.com/package/uuid)
 
+## NPM environment variable management
+* [Node ENV file](https://www.npmjs.com/package/node-env-file)
+
 ## NPM redux modules
 * redux
 * react-redux
