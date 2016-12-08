@@ -63,7 +63,7 @@ describe('Actions', () => {
   })
 });
 
-describe('Tests with firebase todos', () => {
+describe('Actions with firebase todos', () => {
   var testTodoRef;
 
   beforeEach((done) => {
@@ -120,3 +120,16 @@ describe('Tests with firebase todos', () => {
     }, done);
   });
 });
+
+describe('Actions for authentication', () => {
+  it('should generate login action', () => {
+    const action = { type: 'LOGIN', uid: '123abc' };
+    const res = actions.login(action.uid);
+    expect(res).toEqual(action);
+  })
+  it('should generate logout action', () => {
+    const action = { type: 'LOGOUT' };
+    const res = actions.logout();
+    expect(res).toEqual(action);
+  })
+})

@@ -66,4 +66,20 @@ describe('Reducers', () => {
       expect(res[0]).toEqual(todos[0]);
     });
   });
+
+  describe('authReducer', () => {
+    it('should store uid on LOGIN', () => {
+      const action = { type: 'LOGIN', uid: '123abc' };
+      // df references deep freeze as the value shouldn't change
+      const res = reducers.authReducer(undefined, df(action));
+      expect(res.uid).toEqual(action.uid);
+    });
+
+    it('should not store uid on LOGOUT', () => {
+      const authData = { uid: '123abc' };
+      const action = { type: 'LOGOUT' };
+      const res = reducers.authReducer(df(authData), df(action));
+      expect(res).toEqual({});
+    });
+  })
 });

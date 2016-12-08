@@ -90,7 +90,14 @@ export var startToggleTodo = (id, completed) => {
   };
 };
 
-export var startLogin = () => {
+export var login = (uid) => {
+  return {
+    type: 'LOGIN',
+    uid
+  };
+}
+
+export var startLogin = (uid) => {
   return (dispatch, getState) => {
     return firebase.auth().signInWithPopup(githubProvider).then((result) => {
       console.log('Auth worked!', result);
@@ -99,6 +106,10 @@ export var startLogin = () => {
     });
   };
 };
+
+export var logout = () => {
+  return { type: 'LOGOUT' };
+}
 
 export var startLogout = () => {
   return (dispatch, getState) => {
