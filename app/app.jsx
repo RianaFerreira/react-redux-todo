@@ -28,6 +28,7 @@ import router from 'app/router/';
 firebase.auth().onAuthStateChanged((user) => {
   if(user){
     store.dispatch(actions.login(user.uid));
+    store.dispatch(actions.startAddTodos());
     // user is logged in redirect them to the todos page
     hashHistory.push('/todos');
   } else {
@@ -36,8 +37,6 @@ firebase.auth().onAuthStateChanged((user) => {
     hashHistory.push('/');
   }
 });
-
-store.dispatch(actions.startAddTodos());
 
 // Load foundation with the css-loader installed
 $(document).foundation();
